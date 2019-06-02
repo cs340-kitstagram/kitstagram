@@ -20,7 +20,7 @@ CREATE TABLE Friends (
 
 CREATE TABLE Selfies (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    date_uploaded TIMESTAMP NOT NULL,
+    date_uploaded TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     cat_id INTEGER NOT NULL REFERENCES Cats(id)
 ) ENGINE=InnoDB COLLATE utf8mb4_general_ci;
 
@@ -34,7 +34,7 @@ CREATE TABLE Comments (
     selfie_id INTEGER REFERENCES Selfies(id),
     comment_number INTEGER NOT NULL,
     cat_id INTEGER NOT NULL REFERENCES Cats(id),
-    date_posted TIMESTAMP NOT NULL,
+    date_posted TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     body TEXT,
     PRIMARY KEY(selfie_id, comment_number)
 ) ENGINE=InnoDB COLLATE utf8mb4_general_ci;
