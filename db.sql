@@ -10,24 +10,25 @@ CREATE TABLE Cats (
     hashed_password VARCHAR(80) NOT NULL,
     name VARCHAR(50) NOT NULL,
     profile TEXT
-) ENGINE=InnoDB;
+) ENGINE=InnoDB COLLATE utf8mb4_general_ci;
 
 CREATE TABLE Friends (
     friender_id INTEGER NOT NULL REFERENCES Cats (id),
     friendee_id INTEGER NOT NULL REFERENCES Cats (id),
     PRIMARY KEY(friender_id, friendee_id)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB COLLATE utf8mb4_general_ci;
 
 CREATE TABLE Selfies (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
     date_uploaded TIMESTAMP NOT NULL,
-    cat_id INTEGER NOT NULL REFERENCES Cats(id),
-) ENGINE=InnoDB;
+    cat_id INTEGER NOT NULL REFERENCES Cats(id)
+) ENGINE=InnoDB COLLATE utf8mb4_general_ci;
 
 CREATE TABLE Likes (
     cat_id INTEGER REFERENCES Cats(id),
     selfie_id INTEGER REFERENCES Selfies(id),
-);
+    PRIMARY KEY(cat_id, selfie_id)
+) ENGINE=InnoDB COLLATE utf8mb4_general_ci;
 
 CREATE TABLE Comments (
     selfie_id INTEGER REFERENCES Selfies(id),
@@ -36,4 +37,4 @@ CREATE TABLE Comments (
     date_posted TIMESTAMP NOT NULL,
     body TEXT,
     PRIMARY KEY(selfie_id, comment_number)
-)
+) ENGINE=InnoDB COLLATE utf8mb4_general_ci;
