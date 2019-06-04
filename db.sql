@@ -1,3 +1,6 @@
+DROP TRIGGER IF EXISTS incr_likes;
+DROP TRIGGER IF EXISTS decr_likes;
+
 DROP TABLE IF EXISTS Friends;
 DROP TABLE IF EXISTS Likes;
 DROP TABLE IF EXISTS Comments;
@@ -24,6 +27,7 @@ CREATE TABLE Selfies (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     date_uploaded TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     cat_id INTEGER NOT NULL REFERENCES Cats(id),
+    likes INTEGER DEFAULT 0, -- updated by trigger on Likes
     FOREIGN KEY(cat_id) REFERENCES Cats(id)
 ) ENGINE=InnoDB COLLATE utf8mb4_general_ci;
 
@@ -45,3 +49,13 @@ CREATE TABLE Comments (
     FOREIGN KEY(cat_id) REFERENCES Cats(id),
     PRIMARY KEY(selfie_id, comment_number)
 ) ENGINE=InnoDB COLLATE utf8mb4_general_ci;
+
+CREATE TRIGGER incr_likes
+    AFTER INSERT
+    ON Likes FOR EACH ROW
+    UPDATE Selfies SET likes = likes + 1 WHERE id = new.selfie_id;
+
+CREATE TRIGGER decr_likes
+    AFTER DELETE ON Likes
+    FOR EACH ROW
+    UPDATE Selfies SET likes = likes - 1 WHERE id = old.selfie_id;
