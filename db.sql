@@ -25,6 +25,8 @@ CREATE TABLE Friends (
 
 CREATE TABLE Selfies (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    filename VARCHAR(255) NOT NULL,
+    caption TEXT,
     date_uploaded TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     cat_id INTEGER NOT NULL REFERENCES Cats(id),
     likes INTEGER DEFAULT 0, -- updated by trigger on Likes
@@ -59,3 +61,6 @@ CREATE TRIGGER decr_likes
     AFTER DELETE ON Likes
     FOR EACH ROW
     UPDATE Selfies SET likes = likes - 1 WHERE id = old.selfie_id;
+
+-- password=test
+INSERT INTO Cats VALUES (1, 'zelda', '$2y$10$OIWoxot8isgsxegW2.m/UepN3La0xUhRu/7RmeI034kE8axH.PqXi', 'Zelda', '');
