@@ -7,17 +7,17 @@ DROP TABLE IF EXISTS Cats;
 CREATE TABLE Cats (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) UNIQUE NOT NULL,
-    hashed_password VARCHAR(80) NOT NULL,
+    password_hash VARCHAR(80) NOT NULL,
     name VARCHAR(50) NOT NULL,
     profile TEXT
 ) ENGINE=InnoDB COLLATE utf8mb4_general_ci;
 
 CREATE TABLE Friends (
-    friender_id INTEGER NOT NULL,
-    friendee_id INTEGER NOT NULL,
-    FOREIGN KEY(friender_id) REFERENCES Cats (id),
-    FOREIGN KEY(friendee_id) REFERENCES Cats (id),
-    PRIMARY KEY(friender_id, friendee_id)
+    cat_id INTEGER NOT NULL,
+    friend_id INTEGER NOT NULL,
+    FOREIGN KEY(cat_id) REFERENCES Cats (id),
+    FOREIGN KEY(friend_id) REFERENCES Cats (id),
+    PRIMARY KEY(cat_id, friend_id)
 ) ENGINE=InnoDB COLLATE utf8mb4_general_ci;
 
 CREATE TABLE Selfies (
