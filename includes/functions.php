@@ -42,6 +42,11 @@ function pretty_date($ts) {
 
 // ...
 
+// Returns a relative URL to the profile of the cat given by the username
+function get_profile_url($username) {
+  return "profile.php?username=".urlencode($username);
+}
+
 // Returns the full URL of the current page (without query parameters)
 function current_url() {
   $url = 'http';

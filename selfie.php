@@ -2,7 +2,7 @@
 require_once 'includes/all.php';
 
 if (!is_logged_in()) {
-  header("Location: index.php");
+  header("Location: signup.php");
   exit();
 }
 
@@ -20,9 +20,7 @@ $stmt->execute();
 
 $selfie = $stmt->fetch();
 if (!$selfie) {
-  header("Status: 404");
-  echo "not found";
-  exit(0);
+  not_found();
 }
 
 // Get uploader information
@@ -57,16 +55,30 @@ function e($s) { return htmlspecialchars($s); }
   </head>
 
   <body>
-    <div class="container">
+    <header>
       <h1><?php echo e($cat['name']); ?>'s Selfie | Kitstagram</h1>
+    </header>
 
+    <main>
       <img src="./uploads/<?php echo e($selfie['filename']); ?>">
 
       <p><?php echo e($selfie['caption']); ?></p>
       <p>Uploaded by <?php echo e($cat['name']); ?></p>
       <p>Uploaded on <?php echo e(pretty_date($selfie["date_uploaded"])); ?></p>
       <p><?php echo e($selfie['likes']); ?> likes </p>
+    </main>
 
-    </div>
+    <main>
+      <h2>Comments</h2>
+
+      <?php foreach ($comments as $c) { ?>
+        <article class="comment">
+          <div class="username">
+            <a href="<?= e(get_profile_url(e($c['username']))) ?>"><?= e($c['username']) ?></a>
+          </div>
+          <p><?= e($c['body']) ?></p>
+        </article>
+      <?php } ?>
+    </main>
   </body>
 </html>
