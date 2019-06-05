@@ -61,17 +61,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 ?>
 <!doctype html>
-<h1>Upload a selfie</h1>
+<html>
+  <head>
+    <title>Upload a selfie</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" href="styles/normalize.css">
+  </head>
 
-<form action="" method=POST enctype="multipart/form-data">
+  <body>
+    <h1>Upload a selfie</h1>
 
-  <div>
-    <input type="file" name="selfie">
-    <p class="help-block">Supported File Types: JPEG, JPG, less than 1 MB </p>
+    <form action="" method=POST enctype="multipart/form-data">
 
-    <textarea name="caption"></textarea>
-  </div>
+      <div>
+        <input type="file" name="selfie">
+        <p class="help-block">Supported File Types: JPEG, JPG, less than 1 MB </p>
 
-  <input type="submit" value="Upload">
+        <textarea name="caption"></textarea>
+      </div>
 
-</form>
+      <input type="submit" value="Upload">
+
+    </form>
+  </body>
+</html>

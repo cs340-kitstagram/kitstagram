@@ -53,6 +53,7 @@ function e($s) { return htmlspecialchars($s); }
   <head>
     <title><?php echo e($cat['name']); ?>'s Selfie | Kitstagram</title>
     <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" href="styles/normalize.css">
   </head>
 
   <body>

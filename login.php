@@ -39,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <head>
     <title>Log in | Kitstagram</title>
     <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" href="styles/normalize.css">
   </head>
 
   <body>
