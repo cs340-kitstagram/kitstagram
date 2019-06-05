@@ -72,10 +72,16 @@ function e($s) { return htmlspecialchars($s); }
       <h2>Comments</h2>
 
       <?php foreach ($comments as $c) { ?>
-        <article class="comment">
-          <div class="username">
-            <a href="<?= e(get_profile_url(e($c['username']))) ?>"><?= e($c['username']) ?></a>
-          </div>
+        <article class="comment" id="comment-<?= e($c['comment_number']) ?>">
+          <div class="comment-header">
+            <span class="comment-number">
+              <a href="#comment-<?= e($c['comment_number']) ?>"><?=
+                '#'.e($c['comment_number'])
+              ?></a>
+            </span>
+            <span class="username">
+              <a href="<?= e(get_profile_url(e($c['username']))) ?>"><?= e($c['username']) ?></a>
+            </span>
           <p><?= e($c['body']) ?></p>
         </article>
       <?php } ?>
