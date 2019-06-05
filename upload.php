@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 	if (!file_exists($destination)) {
 		move_uploaded_file($tmp, $destination);
+		chmod($destination, 0444);
 	}
 
 	$caption = $_POST["caption"];
