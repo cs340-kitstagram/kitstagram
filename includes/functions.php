@@ -33,6 +33,11 @@ function connect_db() {
   return $db;
 }
 
+// Pretty-print a timestamp like "January 5th, 2015 at 5:14am"
+function pretty_date($ts) {
+  return date("F jS, Y \\a\\t g:ia", $ts);
+}
+
 // Accessors
 
 // ...
