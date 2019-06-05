@@ -1,0 +1,5 @@
+# Disable PHP and force all files to be served as image/jpeg
+# This is a preemptive security measure to make it harder for an attacker to
+# get code execution via a malicious upload
+DefaultType image/jpeg
+php_flag engine off
