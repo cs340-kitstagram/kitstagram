@@ -65,7 +65,7 @@ function e($s) { return htmlspecialchars($s); }
       <p><?php echo e($selfie['caption']); ?></p>
       <p>Uploaded by <?php echo e($cat['name']); ?></p>
       <p>Uploaded on <?php echo e(pretty_date($selfie["date_uploaded"])); ?></p>
-      <p><?php echo e($selfie['likes']); ?> likes </p>
+      <p>&#x2764; <?php echo e($selfie['likes']); ?> likes </p>
     </main>
 
     <main>
