@@ -2,6 +2,13 @@
 
 // functions.php - common functionality
 
+// Escapes a string for safely embedding in HTML
+// This is just a short alias for htmlspecialchars,
+// which is too long to type all the time.
+function e($s) {
+  return htmlspecialchars($s);
+}
+
 // Reports whether a user is currently logged in.
 function is_logged_in() {
   return array_key_exists('user_id', $_SESSION);
@@ -40,11 +47,26 @@ function pretty_date($ts) {
 
 // Accessors
 
-// ...
+// Retrieves data about the currently-logged-in user
+function get_logged_in_user($db) {
+  $id = get_logged_in_user_id();
+  if (!$id) {
+    return FALSE;
+  }
+  $stmt = $db->prepare("SELECT * FROM Cats WHERE id = ?");
+  $stmt->bindValue(1, $id, PDO::PARAM_INT);
+  $stmt->execute();
+  return $stmt->fetch();
+}
 
 // Returns a relative URL to the profile of the cat given by the username
 function get_profile_url($username) {
   return "profile.php?username=".urlencode($username);
+}
+
+// Returns a relative URL to the selfie given by the id
+function get_selfie_url($id) {
+  return "selfie.php?id=".urlencode($id);
 }
 
 // Returns the full URL of the current page (without query parameters)

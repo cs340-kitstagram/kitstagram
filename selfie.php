@@ -6,9 +6,8 @@ if (!is_logged_in()) {
   exit();
 }
 
-$errors = array();
-
 $db = connect_db();
+$my = get_logged_in_user($db);
 
 $id = $_GET["id"];
 
@@ -43,10 +42,15 @@ $stmt->execute();
 
 $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-function e($s) { return htmlspecialchars($s); }
+$stmt = $db->prepare("SELECT COALESCE(max(m.comment_number)+1, 1) as `num` FROM Comments m
+  WHERE m.selfie_id = :selfie_id");
+$stmt->bindValue("selfie_id", $id);
+$stmt->execute();
+$row = $stmt->fetch();
+$next_comment_number = $row['num'];
 
 ?>
-<!doctype htmL>
+<!doctype html>
 <html>
   <head>
     <title><?php echo e($cat['name']); ?>'s Selfie | Kitstagram</title>
@@ -59,6 +63,8 @@ function e($s) { return htmlspecialchars($s); }
       <h1><?php echo e($cat['name']); ?>'s Selfie | Kitstagram</h1>
     </header>
 
+    <?php include 'includes/flash.php' ?>
+
     <main>
       <img src="./uploads/<?php echo e($selfie['filename']); ?>">
 
@@ -68,7 +74,7 @@ function e($s) { return htmlspecialchars($s); }
       <p>&#x2764; <?php echo e($selfie['likes']); ?> likes </p>
     </main>
 
-    <main>
+    <div>
       <h2>Comments</h2>
 
       <?php foreach ($comments as $c) { ?>
@@ -85,6 +91,24 @@ function e($s) { return htmlspecialchars($s); }
           <p><?= e($c['body']) ?></p>
         </article>
       <?php } ?>
-    </main>
+
+      <form action="comment.php" method="POST">
+        <article class="comment">
+          <div class="comment-header">
+            <span class="comment-number">
+              <?= '#'.e($next_comment_number) ?>
+            </span>
+            <span class="username">
+              <a href="<?= e(get_profile_url(e($my['username']))) ?>"><?= e($my['username']) ?></a>
+            </span>
+          </div>
+          <textarea name="body"></textarea>
+          <input type="hidden" name="selfie_id" value="<?= e($selfie['id']) ?>">
+          <div>
+            <button>Add Comment</button>
+          </div>
+        </article>
+      </form>
+    </div>
   </body>
 </html>

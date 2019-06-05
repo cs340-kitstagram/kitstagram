@@ -36,8 +36,6 @@ $selfies = $stmt->fetchAll(PDO::FETCH_ASSOC);
   #SELECT f.friend_id FROM Friends f WHERE f.cat_id = :profile_id;
     #INSERT INTO Friends (cat_id, friend_id) VALUES (:current_id, :profile_id);
 
-function e($s) { return htmlspecialchars($s); }
-
 ?>
 <!doctype htmL>
 <html>
