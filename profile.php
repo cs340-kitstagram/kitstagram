@@ -47,17 +47,15 @@ function e($s) { return htmlspecialchars($s); }
     <link rel="stylesheet" href="styles/normalize.css">
   </head>
 
-  <header>
-    <title>$Username's Profile</title>
-  </header>
-
   <body>
+    <header>
+      <h1><?php echo e($cat['name']); ?>'s Profile | Kitstagram</h1>
+    </header>
+
     <main>
 
-      <h1><?php echo e($cat['name']); ?>'s Profile | Kitstagram</h1>
-
       <div style="border-radius: 5px">
-          <header>My Selfies</header>
+          <h2>My Selfies</h2>
       </div>
 
       <?php foreach ($selfies as $selfie) { ?>
@@ -68,7 +66,7 @@ function e($s) { return htmlspecialchars($s); }
       <?php } ?>
 
       <div style="border-radius: 5px">
-          <header>Bio</header>
+          <h2>Bio</h2>
       </div>
 
     </main>
