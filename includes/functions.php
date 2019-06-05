@@ -67,3 +67,10 @@ function is_valid_id($db, $table, $id) {
   $stmt->execute();
   return !!$stmt->fetch()[0];
 }
+
+// Display a "not found" error page and exit the script
+function not_found() {
+  header('Status: 404');
+  echo "not found";
+  exit(0);
+}
