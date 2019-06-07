@@ -10,17 +10,24 @@ main { display: flex; }
 .selfie img { max-width: 500px; height: auto; }
 .selfie-info { flex: 1; padding: 0 20px; }
 
-.comments { background-color: #d5d5d5;  margin: -10px -20px 0; padding: 0 25px 25px; }
+.comments { background-color: #d5d5d5;  margin: 0 -20px 0; padding: 0 25px 25px; }
 .comments h2 { padding-top: 20px;  }
 .comment {}
-.comment-number { font-size: larger; }
-.comment-number a { color: #333; underline: none; }
-.comment-number a:hover { color: blue; underline: none; }
+.comment-number a { color: #333; text-decoration: none; }
+.comment-number a:hover { color: #4885ed; text-decoration: underline; }
+.comment-author { font-weight: bold; }
 
-.your-comment textarea { width: 50em; height: }
 
 button { background-color: #4885ed /*google blue*/; font-family: sans-serif; color: white; border: 2px outset #4885ed; padding: 7px; border-radius: 7px; }
 
 .flash { padding: 20px; }
 .flash-success { background-color: #99ee99; }
 .flash-warning { background-color: #ee9999; }
+
+.comment:target { background-color: #e9e9d5; }
+.comment:target { animation: 0.25s yellow-flash ease-in-out alternate 1; }
+
+@keyframes yellow-flash {
+    0% { background-color: transparent; }
+    100% { background-color: #e9e9d5; }
+}

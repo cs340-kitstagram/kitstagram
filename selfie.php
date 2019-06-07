@@ -66,7 +66,7 @@ function profile_link($username) {
 
   <body>
     <header>
-      <h1>Kitstagram: <?php echo e($cat['name']); ?>'s Selfie</h1>
+      <h1>kitstagram &gt; <?php echo e($cat['name']); ?>'s Selfie</h1>
     </header>
 
     <?php include 'includes/flash.php' ?>
@@ -96,7 +96,7 @@ function profile_link($username) {
                 '#'.e($c['comment_number'])
               ?></a>
             </span>
-            <span class="username">
+            <span class="comment-author">
               <?= profile_link($c['username']) ?>
             </span>
           <p><?= e($c['body']) ?></p>
@@ -109,7 +109,7 @@ function profile_link($username) {
             <span class="comment-number">
               <?= '#'.e($next_comment_number) ?>
             </span>
-            <span class="username">
+            <span class="comment-author">
               <?= profile_link($my['username']) ?>
             </span>
           </div>
