@@ -17,26 +17,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   $db = connect_db();
 
-  // insert into database
-  $db = "INSERT INTO Cats (id, username, password_hash, name, profile) VALUES (DEFAULT, ?, ?, ?, NULL)";
+  $pwhash = password_hash($password, PASSWORD_BCRYPT);
 
-  $stmt = $db->prepare("SELECT username, password_hash FROM Cats"); // Don't think this is right
-  
+  // insert into database
+  $stmt = $db->prepare("INSERT INTO Cats (username, password_hash, name, profile) VALUES (:username, :password_hash, :name, NULL)");
   $stmt->bindValue("username", $username);
   $stmt->bindValue("name", $name);
-  $stmt->bindValue("password_hash", $password);
+  $stmt->bindValue("password_hash", $pwhash);
   $stmt->execute();
 
+  $new_id = $db->lastInsertId();
 
-
-
-
+  // TODO(calvin):
   // errors to implement:
   // account already exists
   // passwords dont match
 
   if (!$errors) {
-    header("Location: index.php");
+    // log the user in and redirect to their profile
+    // TODO: redirect to dashboard?
+    $_SESSION["user_id"] = $new_id;
+    header("Location: ".get_profile_url($username));
+    //header("Location: index.php");
     exit();
   }
 }
@@ -72,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <label for="inputPassword" class="sr-only">Enter a New Password</label>
           <input type="password" id="inputPassword" name="password" class="form-control last" placeholder="Password" required  value="<?php echo $password; ?>">
         </div>
-        
+
         <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
       </form>
       <br>
