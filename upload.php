@@ -63,25 +63,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 <!doctype html>
 <html>
   <head>
-    <title>Upload a selfie</title>
+    <title>Upload a selfie | kitstagram</title>
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/kitstagram.css">
   </head>
 
   <body>
-    <h1>Upload a selfie</h1>
+    <header>
+      <h1>kitstagram &gt; Upload a selfie</h1>
+    </header>
 
-    <form action="" method=POST enctype="multipart/form-data">
+    <?php include 'includes/flash.php' ?>
 
-      <div>
-        <input type="file" name="selfie">
-        <p class="help-block">Supported File Types: JPEG, JPG, less than 1 MB </p>
+    <main>
+      <form action="" method=POST enctype="multipart/form-data">
 
-        <textarea name="caption"></textarea>
-      </div>
+        <div>
+          <input type="file" name="selfie">
+          <p class="help-block">Supported File Types: JPEG, JPG, less than 1 MB </p>
 
-      <input type="submit" value="Upload">
+          <p>Caption (optional):<br>
+            <textarea name="caption" rows="3" cols="50"></textarea>
+          </p>
+        </div>
 
-    </form>
+        <button>Upload</button>
+
+      </form>
+    </main>
   </body>
 </html>
