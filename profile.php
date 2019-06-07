@@ -22,9 +22,8 @@ if (!$cat) {
 }
 
 // get friends
-$stmt = $db->prepare("SELECT c.username FROM Friends f JOIN Cats c ON f.friend_id = c.id 
-  WHERE c.username = :username");
-$stmt->bindValue("username", $username);
+$stmt = $db->prepare("SELECT c.username FROM Friends f JOIN Cats c WHERE f.friend_id = c.id AND f.cat_id = :user_id");
+$stmt->bindValue("id", $user_id);
 $stmt->execute();
 $friends = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -46,7 +45,7 @@ $selfies = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <head>
     <title><?php echo e($cat['name']); ?>'s Profile | Kitstagram</title>
     <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/kitstagram.css">
   </head>
 
   <body>
@@ -61,7 +60,9 @@ $selfies = $stmt->fetchAll(PDO::FETCH_ASSOC);
       </div>
 
       <?php foreach ($selfies as $selfie) { ?>
-        <img src="./uploads/<?php echo e($selfie['filename']); ?>">
+        <figure>
+          <img src="./uploads/<?php echo e($selfie['filename']); ?>">
+        </figure>
 
         <p><?php echo e($selfie['caption']); ?></p>
         <p><?php echo e($selfie['likes']); ?> likes </p>
