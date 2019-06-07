@@ -55,8 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 	$_SESSION['flash_success'] = array('Upload Successful');
 
-	// TODO(ae): redirect to new file
-	header("Location: index.php");
+	$url = "selfie.php?id=".urlencode($pic_id);
+	header("Location: ".$url);
 }
 
 ?>
