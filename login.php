@@ -40,13 +40,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Log in | Kitstagram</title>
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/kitstagram.css">
   </head>
 
   <body>
-    <div class="container">
+    <header>
+      <h1>kitstagram &gt; login</h1>
+    </header>
+
+    <main>
+      <h2>Please sign in</h2>
 
       <form class="form-signin" action="" method="POST">
-        <h2 class="form-signin-heading">Please sign in</h2>
 
         <div class="<?php if (isset($errors['username'])) echo 'has-error'; ?>">
           <label for="inputUsername" class="sr-only">Username</label>
@@ -64,11 +69,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <?php } ?>
         </div>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <br>
-        <a href="signup.php">Create new account</a>
+        <p>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          <br>
+          <a href="signup.php">Create new account</a>
+        </p>
       </form>
 
-    </div>
+    </main>
   </body>
 </html>

@@ -71,7 +71,7 @@ function profile_link($username) {
 
     <?php include 'includes/flash.php' ?>
 
-    <main>
+    <main class="twocolumn">
       <figure class="selfie">
         <img src="./uploads/<?php echo e($selfie['filename']); ?>">
       </figure>
