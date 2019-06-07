@@ -7,7 +7,7 @@ header * { margin-top: 0; }
 .selfie { outline: 1px #ccc solid; padding: 20px; margin: 0; width: 500px; height: 500px; }
 .selfie { background-color: #f5f5f5; }
 .selfie { display: flex; align-items: center; justify-content: center; }
-.selfie img { max-width: 500px; height: auto; }
+.selfie img { max-width: 500px; max-height: 500px; height: auto; }
 .selfie-info { flex: 1; padding: 0 20px; min-width: 15em; }
 
 .comments { background-color: #d5d5d5;  margin: 0 -20px 0; padding: 0 25px 25px; }
