@@ -49,6 +49,11 @@ $stmt->execute();
 $row = $stmt->fetch();
 $next_comment_number = $row['num'];
 
+
+function profile_link($username) {
+  return '<a href="'. e(get_profile_url(e($username))) .'">'. e($username) .'</a>';
+}
+
 ?>
 <!doctype html>
 <html>
@@ -56,25 +61,31 @@ $next_comment_number = $row['num'];
     <title><?php echo e($cat['name']); ?>'s Selfie | Kitstagram</title>
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/kitstagram.css">
   </head>
 
   <body>
     <header>
-      <h1><?php echo e($cat['name']); ?>'s Selfie | Kitstagram</h1>
+      <h1>Kitstagram: <?php echo e($cat['name']); ?>'s Selfie</h1>
     </header>
 
     <?php include 'includes/flash.php' ?>
 
     <main>
-      <img src="./uploads/<?php echo e($selfie['filename']); ?>">
+      <figure class="selfie">
+        <img src="./uploads/<?php echo e($selfie['filename']); ?>">
+      </figure>
 
-      <p><?php echo e($selfie['caption']); ?></p>
-      <p>Uploaded by <?php echo e($cat['name']); ?></p>
-      <p>Uploaded on <?php echo e(pretty_date($selfie["date_uploaded"])); ?></p>
-      <p>&#x2764; <?php echo e($selfie['likes']); ?> likes </p>
+      <div class="selfie-info">
+        <p><?php echo e($selfie['caption']); ?></p>
+        <p>Uploaded
+          by <?= profile_link($cat['name']) ?>
+          on <?php echo e(pretty_date($selfie["date_uploaded"])); ?></p>
+        <p>&#x2764; <?php echo e($selfie['likes']); ?> likes </p>
+      </div>
     </main>
 
-    <div>
+    <div class="comments">
       <h2>Comments</h2>
 
       <?php foreach ($comments as $c) { ?>
@@ -86,23 +97,23 @@ $next_comment_number = $row['num'];
               ?></a>
             </span>
             <span class="username">
-              <a href="<?= e(get_profile_url(e($c['username']))) ?>"><?= e($c['username']) ?></a>
+              <?= profile_link($c['username']) ?>
             </span>
           <p><?= e($c['body']) ?></p>
         </article>
       <?php } ?>
 
       <form action="comment.php" method="POST">
-        <article class="comment">
+        <article class="comment your-comment">
           <div class="comment-header">
             <span class="comment-number">
               <?= '#'.e($next_comment_number) ?>
             </span>
             <span class="username">
-              <a href="<?= e(get_profile_url(e($my['username']))) ?>"><?= e($my['username']) ?></a>
+              <?= profile_link($my['username']) ?>
             </span>
           </div>
-          <textarea name="body"></textarea>
+          <textarea name="body" rows="3" cols="50"></textarea>
           <input type="hidden" name="selfie_id" value="<?= e($selfie['id']) ?>">
           <div>
             <button>Add Comment</button>
