@@ -18,7 +18,7 @@ header * { margin-top: 0; }
 .comment-author { font-weight: bold; }
 
 .profile-bio { border-radius: 5px; background-color: #d5d5d5; margin: 0 -20px 0; padding: 0 25px 25px; display: block; margin-block-start: 5em; margin-block-end: 1em; }
-
+.profile article { margin: 5%; padding: 5%; /*background-color:*/}
 
 button { background-color: #4885ed /*google blue*/; font-family: sans-serif; color: white; border: 2px outset #4885ed; padding: 7px; border-radius: 7px; }
 
