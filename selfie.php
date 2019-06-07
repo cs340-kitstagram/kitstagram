@@ -79,7 +79,7 @@ function profile_link($username) {
       <div class="selfie-info">
         <p><?php echo e($selfie['caption']); ?></p>
         <p>Uploaded
-          by <?= profile_link($cat['name']) ?>
+          by <?= profile_link($cat['username']) ?>
           on <?php echo e(pretty_date($selfie["date_uploaded"])); ?></p>
         <p>&#x2764; <?php echo e($selfie['likes']); ?> likes </p>
       </div>
