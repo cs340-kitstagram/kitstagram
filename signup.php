@@ -50,35 +50,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Sign Up | Kitstagram</title>
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/kitstagram.css">
   </head>
 
+
   <body>
-    <div class="container">
+    <header>
+      <h1>kitstagram &gt; Signup</h1>
+    </header>
 
-      <form class="form-signin" action="" method="POST">
-        <h2 class="form-signin-heading">Please Create a New Account</h2>
+    <main>
+      
+        <form  action="" method="POST">
+          <h2>Please Create a New Account</h2>
 
-        <div >
-          <label for="inputUsername" class="sr-only">Enter the Username You Want to Use</label>
-          <input type="text" id="inputUsername" name="username" class="form-control first" 
-                placeholder="Username" required autofocus value="<?php echo $username; ?>">
-        </div>
+          <div >
+            <label for="inputUsername" class="sr-only" style="display:inline">Enter Your New Username</label>
+            <input type="text" id="inputUsername" name="username" class="form-control first" 
+                  placeholder="Username" required autofocus value="<?php echo $username; ?>">
+          </div>
 
-        <div >
-          <label for="inputName" class="sr-only">Enter your Name</label>
-          <input type="text" id="inputName" name="name" class="form-control first" 
-                placeholder="Name" required autofocus value="<?php echo $name; ?>">
-        </div>
+          <div >
+            <label for="inputName" class="sr-only" style="display:inline; ">Enter your Name</label>
+            <input type="text" id="inputName" name="name" class="form-control first" 
+                  placeholder="Name" required autofocus value="<?php echo $name; ?>">
+          </div>
 
-        <div class="<?php if (isset($errors['password'])) echo 'has-error'; ?>">
-          <label for="inputPassword" class="sr-only">Enter a New Password</label>
-          <input type="password" id="inputPassword" name="password" class="form-control last" placeholder="Password" required  value="<?php echo $password; ?>">
-        </div>
+          <div class="<?php if (isset($errors['password'])) echo 'has-error'; ?>">
+            <label for="inputPassword" class="sr-only" style="display:inline">Enter a New Password</label>
+            <input type="password" id="inputPassword" name="password" class="form-control last" placeholder="Password" required  value="<?php echo $password; ?>">
+          </div>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
-      </form>
-      <br>
-      <a href="login.php">Already have an Account? Log in Here</a>
-    </div>
+          <p>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
+            <br>
+            <a href="login.php">Already have an Account? Log in Here</a>
+          </p>
+        </form>
+      
+    </main>
   </body>
 </html>
