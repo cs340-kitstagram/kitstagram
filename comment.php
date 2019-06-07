@@ -28,6 +28,8 @@ if ($body === "") {
   exit();
 }
 
+// TODO(ae): should probably check that the selfie exists
+
 $stmt = $db->prepare("SELECT COALESCE(MAX(comment_number),0)+1 AS `num` FROM Comments WHERE selfie_id = :id");
 $stmt->bindValue("id", $selfie_id, PDO::PARAM_INT);
 $stmt->execute();
