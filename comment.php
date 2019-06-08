@@ -28,15 +28,19 @@ if ($body === "") {
   exit();
 }
 
-// TODO(ae): should probably check that the selfie exists
+if (!is_valid_id($db, "Selfies", $selfie_id)) {
+  header("Status: 404");
+  echo 'no such selfie';
+  exit();
+}
+
+// TODO(andrew): Check if comment exceeds length limit
 
 $stmt = $db->prepare("SELECT COALESCE(MAX(comment_number),0)+1 AS `num` FROM Comments WHERE selfie_id = :id");
 $stmt->bindValue("id", $selfie_id, PDO::PARAM_INT);
 $stmt->execute();
 $row = $stmt->fetch();
 if (!$row) {
-  header("Status: 500");
-  echo "Internal server error";
   exit();
 }
 $comment_number = $row['num'];
@@ -47,8 +51,6 @@ $stmt->bindValue(2, $cat_id, PDO::PARAM_INT);
 $stmt->bindValue(3, $body, PDO::PARAM_STR);
 $stmt->bindValue(4, $comment_number, PDO::PARAM_STR);
 if (!$stmt->execute()) {
-  header("Status: 500");
-  echo "Internal server error";
   exit();
 }
 
