@@ -55,7 +55,14 @@ $selfies = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <main>
 
-      <section>
+      <section class="profile-section">
+        <h2>Bio</h2>
+          <div>
+            <p class="profile-paragraph"><?php echo e($cat['profile']); ?></p>
+          </div>
+      </section>
+
+      <section class="profile-section">
         <h2>My Selfies</h2>
 
         <?php foreach ($selfies as $selfie) { ?>
@@ -72,7 +79,7 @@ $selfies = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php } ?>
       </section>
 
-      <section class="profile profile-friends">
+      <section class="profile-section">
         <h2>Friends</h2>
 
         <?php foreach ($friends as $friend) { ?>
@@ -80,12 +87,6 @@ $selfies = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php } ?>
       </section>
 
-      <section>
-        <h2>Bio</h2>
-        <div style="border-radius: 5px;">
-          <p><?php echo e($cat['profile']); ?></p>
-        </div>
-      </section>
 
     </main>
   </body>
