@@ -59,19 +59,21 @@ $selfies = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h2>My Selfies</h2>
 
         <?php foreach ($selfies as $selfie) { ?>
-          <figure>
-            <img src="./uploads/<?php echo e($selfie['filename']); ?>">
-          </figure>
+          <div class="selfie-small">
+            <a href="<?= get_selfie_url($selfie['id']) ?>">
+              <figure>
+                <img src="./uploads/<?= e($selfie['filename']); ?>">
+              </figure>
+            </a>
 
-          <p><?php echo e($selfie['caption']); ?></p>
-          <p><?php echo e($selfie['likes']); ?> likes </p>
+            <p><?php echo e($selfie['caption']); ?></p>
+            <p><?php echo e($selfie['likes']); ?> likes </p>
+          </div>
         <?php } ?>
       </section>
 
       <section class="profile profile-friends">
-        <div>
-          <h2>Friends</h2>
-        </div>
+        <h2>Friends</h2>
 
         <?php foreach ($friends as $friend) { ?>
           <p><?php echo e($friend['username']); ?></p>

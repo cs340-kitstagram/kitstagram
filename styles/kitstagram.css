@@ -4,11 +4,20 @@ header * { margin-top: 0; }
 
 .twocolumn { display: flex; flex-wrap: wrap; }
 
-.selfie { outline: 1px #ccc solid; padding: 20px; margin: 0; width: 500px; height: 500px; }
-.selfie { background-color: #f5f5f5; }
+.selfie, .selfie-small { outline: 1px #ccc solid; background-color: #f5f5f5; }
+
+.selfie { padding: 20px; margin: 0; width: 500px; height: 500px; }
 .selfie { display: flex; align-items: center; justify-content: center; }
 .selfie img { max-width: 500px; max-height: 500px; height: auto; }
 .selfie-info { flex: 1; padding: 0 20px; min-width: 15em; }
+
+.selfie-small { outline: 1px #ccc solid; background-color: #f5f5f5; }
+.selfie-small { padding: 0px; margin: 0 20px 20px 0; width: 240px; display: inline-block; vertical-align: top;  }
+.selfie-small p { margin: .5em 20px; }
+.selfie-small figure { padding: 20px; margin: 0; width: 200px; height: 200px; }
+.selfie-small figure { display: flex; align-items: center; justify-content: center; }
+.selfie-small img { max-width: 200px; max-height: 200px; height: auto; }
+/*.selfie-small .selfie-info { flex: 1; padding: 0 20px; min-width: 15em; }*/
 
 .comments { background-color: #d5d5d5;  margin: 0 -20px 0; padding: 0 25px 25px; }
 .comments h2 { padding-top: 20px;  }
