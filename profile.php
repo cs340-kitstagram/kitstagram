@@ -38,6 +38,9 @@ $selfies = $stmt->fetchAll(PDO::FETCH_ASSOC);
   #SELECT f.friend_id FROM Friends f WHERE f.cat_id = :profile_id;
     #INSERT INTO Friends (cat_id, friend_id) VALUES (:current_id, :profile_id);
 
+function profile_link($username) {
+  return '<a href="'. e(get_profile_url(e($username))) .'">'. e($username) .'</a>';
+}
 
 ?>
 <!doctype htmL>
@@ -83,7 +86,7 @@ $selfies = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h2>Friends</h2>
 
         <?php foreach ($friends as $friend) { ?>
-          <p><?php echo e($friend['username']); ?></p>
+          <p><?= profile_link($friend['username']) ?></p>
         <?php } ?>
       </section>
 

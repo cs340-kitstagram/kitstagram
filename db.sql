@@ -89,9 +89,9 @@ INSERT INTO Friends VALUES (23, 33);
 
 -- Selfies Table Initial Values --
 INSERT INTO Selfies VALUES (101, 'zelda.jpg', 'me', current_timestamp(), 1, 0);
-INSERT INTO Selfies VALUES (201, 'selfie1.jpg', 'selfie 1', current_timestamp(), 2, 0);
-INSERT INTO Selfies VALUES (202, 'selfie2.jpg', 'selfie 2', current_timestamp(), 2, 0);
-INSERT INTO Selfies VALUES (301, 'happy.jpg', 'happy cat', current_timestamp(), 3, 0);
+INSERT INTO Selfies VALUES (201, 'link1.jpg', 'selfie 1', current_timestamp(), 2, 0);
+INSERT INTO Selfies VALUES (301, 'buster.jpg', 'selfie 2', current_timestamp(), 3, 0);
+INSERT INTO Selfies VALUES (302, 'happybuster.jpg', 'happy cat', current_timestamp(), 3, 0);
 INSERT INTO Selfies VALUES (501, 'misty.jpg', 'misty selfie', current_timestamp(), 5, 0);
 INSERT INTO Selfies VALUES (601, 'whisky.jpg', 'whisky selfie', current_timestamp(), 6, 0);
 INSERT INTO Selfies VALUES (701, 'pouncin.jpg', 'pouncin', current_timestamp(), 7, 0);
