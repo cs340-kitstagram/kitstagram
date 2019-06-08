@@ -12,7 +12,7 @@ $user_id = get_logged_in_user_id();
 $username = $_GET["username"]; // username
 
 // Get user info
-$stmt = $db->prepare("SELECT c.name, c.username, c.profile FROM Cats c WHERE c.username = :username");
+$stmt = $db->prepare("SELECT c.id, c.name, c.username, c.profile FROM Cats c WHERE c.username = :username");
 $stmt->bindValue("username", $username);
 $stmt->execute();
 $cat = $stmt->fetch();
@@ -22,8 +22,8 @@ if (!$cat) {
 }
 
 // get friends
-$stmt = $db->prepare("SELECT c.username FROM Friends f JOIN Cats c WHERE f.friend_id = c.id AND f.cat_id = :user_id");
-$stmt->bindValue("id", $user_id);
+$stmt = $db->prepare("SELECT c.username FROM Friends f JOIN Cats c ON f.friend_id = c.id WHERE f.cat_id = :id");
+$stmt->bindValue("id", $cat['id']);
 $stmt->execute();
 $friends = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -73,7 +73,7 @@ $selfies = $stmt->fetchAll(PDO::FETCH_ASSOC);
       </div>
 
       <?php foreach ($friends as $friend) { ?>
-        <p><?php echo e($friend); ?></p>
+        <p><?php echo e($friend['username']); ?></p>
       <?php } ?>
       </article>
 
