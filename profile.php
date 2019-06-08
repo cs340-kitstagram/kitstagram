@@ -56,31 +56,32 @@ $selfies = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <main>
 
       <article>
-      <h2>My Selfies</h2>
+        <h2>My Selfies</h2>
+
         <?php foreach ($selfies as $selfie) { ?>
           <figure>
-          <img src="./uploads/<?php echo e($selfie['filename']); ?>">
-        </figure>
+            <img src="./uploads/<?php echo e($selfie['filename']); ?>">
+          </figure>
 
-        <p><?php echo e($selfie['caption']); ?></p>
-        <p><?php echo e($selfie['likes']); ?> likes </p>
-      <?php } ?>
+          <p><?php echo e($selfie['caption']); ?></p>
+          <p><?php echo e($selfie['likes']); ?> likes </p>
+        <?php } ?>
       </article>
 
       <article class="profile profile-friends">
-      <div>
-        <h2>Friends</h2>
-      </div>
+        <div>
+          <h2>Friends</h2>
+        </div>
 
-      <?php foreach ($friends as $friend) { ?>
-        <p><?php echo e($friend['username']); ?></p>
-      <?php } ?>
+        <?php foreach ($friends as $friend) { ?>
+          <p><?php echo e($friend['username']); ?></p>
+        <?php } ?>
       </article>
 
       <article>
         <h2>Bio</h2>
-          <div style="border-radius: 5px;">
-            <p><?php echo e($cat['profile']); ?></p>
+        <div style="border-radius: 5px;">
+          <p><?php echo e($cat['profile']); ?></p>
         </div>
       </article>
 
