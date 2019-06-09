@@ -49,6 +49,14 @@ $stmt->execute();
 $row = $stmt->fetch();
 $next_comment_number = $row['num'];
 
+// Find out whether we've liked this selfie
+$stmt = $db->prepare("SELECT EXISTS (SELECT 1 FROM Likes WHERE selfie_id = :selfie_id AND cat_id = :cat_id) AS `liked`");
+$stmt->bindValue("selfie_id", $id);
+$stmt->bindValue("cat_id", $my['id']);
+$stmt->execute();
+$row = $stmt->fetch();
+$liked = $row['liked'];
+
 
 function profile_link($username) {
   return '<a href="'. e(get_profile_url(e($username))) .'">'. e($username) .'</a>';
@@ -81,7 +89,13 @@ function profile_link($username) {
         <p>Uploaded
           by <?= profile_link($cat['username']) ?>
           on <?php echo e(pretty_date($selfie["date_uploaded"])); ?></p>
-        <p>&#x2764; <?php echo e($selfie['likes']); ?> likes </p>
+        <p>&#x2764; <span class="like-count"><?php echo e($selfie['likes']); ?></span> likes </p>
+
+        <?php if (!$liked) { ?>
+          <p><button class="like-button" value=1>Like this selfie</button></p>
+        <?php } else { ?>
+          <p><button class="like-button" value=0>Unlike this selfie</button></p>
+        <?php } ?>
       </div>
     </main>
 
@@ -121,5 +135,36 @@ function profile_link($username) {
         </article>
       </form>
     </div>
+
+    <script>
+      (function() {
+        var selfie_id = <?= e($id) ?>;
+        [].forEach.call(document.getElementsByClassName("like-button"), function(elem) {
+          elem.addEventListener("click", function() {
+            var like = +elem.value;
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "like.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+              if (xhr.readyState === 4 && xhr.status === 200) {
+                var newlikes = xhr.responseText;
+                [].forEach.call(document.getElementsByClassName("like-count"), function(count) {
+                  count.textContent = newlikes;
+                });
+                if (like) {
+                  elem.textContent = "Unlike this selfie";
+                  elem.value = 0;
+                } else {
+                  elem.textContent = "Like this selfie";
+                  elem.value = 1;
+                }
+              }
+            };
+            var body = "selfie_id="+encodeURIComponent(selfie_id)+"&like="+encodeURIComponent(like);
+            xhr.send(body);
+          });
+        });
+      })();
+    </script>
   </body>
 </html>
