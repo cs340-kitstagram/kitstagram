@@ -33,6 +33,7 @@ header * { margin-top: 0; }
 
 
 button { background-color: #4885ed /*google blue*/; font-family: sans-serif; color: white; border: 2px outset #4885ed; padding: 7px; border-radius: 7px; }
+button.like-button[value='0'] { background-color: #db3236 /*google red*/; color: white; border-color: #db3236; }
 
 .flash { padding: 20px; }
 .flash-success { background-color: #99ee99; }
