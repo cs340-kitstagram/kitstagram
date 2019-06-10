@@ -72,6 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   <body>
     <header>
       <h1>kitstagram &gt; Upload a selfie</h1>
+      <?php include "includes/nav.php"; ?>
     </header>
 
     <?php include 'includes/flash.php' ?>

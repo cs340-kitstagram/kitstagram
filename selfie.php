@@ -70,6 +70,7 @@ $liked = $row['liked'];
   <body>
     <header>
       <h1>kitstagram &gt; <?php echo e($cat['name']); ?>'s Selfie</h1>
+      <?php include "includes/nav.php"; ?>
     </header>
 
     <?php include 'includes/flash.php' ?>

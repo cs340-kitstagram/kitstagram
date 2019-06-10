@@ -57,12 +57,14 @@ $selfies = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <head>
     <title><?php echo e($cat['name']); ?>'s Profile | Kitstagram</title>
     <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" href="styles/normalize.css">
     <link rel="stylesheet" href="styles/kitstagram.css">
   </head>
 
   <body>
     <header>
-      <h1><?php echo e($cat['name']); ?>'s Profile | Kitstagram</h1>
+      <h1>kitstagram &gt; <?php echo e($cat['name']); ?>'s Profile</h1>
+      <?php include "includes/nav.php"; ?>
     </header>
 
     <main>
