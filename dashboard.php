@@ -6,15 +6,30 @@ if (!is_logged_in()) {
 }
 $db = connect_db();
 $user_id = get_logged_in_user_id();
-$username = $_GET["username"]; // username
-// Get user info
-$stmt = $db->prepare("SELECT c.id, c.name, c.username, c.profile FROM Cats c WHERE c.username = :username");
-$stmt->bindValue("username", $username);
-$stmt->execute();
-$cat = $stmt->fetch();
-if (!$cat) {
-  not_found();
+
+if (isset($username)) {
+  $username = $_GET["username"]; // username
+
+  // Get user info
+  $stmt = $db->prepare("SELECT c.id, c.name, c.username, c.profile FROM Cats c WHERE c.username = :username");
+  $stmt->bindValue("username", $username);
+  $stmt->execute();
+  $cat = $stmt->fetch();
+  if (!$cat) {
+    not_found();
+  }
+} else {
+  // Default to current user
+  $stmt = $db->prepare("SELECT c.id, c.name, c.username, c.profile FROM Cats c WHERE c.id = :id");
+  $stmt->bindValue("id", $user_id);
+  $stmt->execute();
+  $cat = $stmt->fetch();
+  if (!$cat) {
+    not_found();
+  }
+  $username = $cat['username'];
 }
+
 // get friends
 $stmt = $db->prepare("SELECT c.username FROM Friends f JOIN Cats c ON f.friend_id = c.id WHERE f.cat_id = :id");
 $stmt->bindValue("id", $cat['id']);
