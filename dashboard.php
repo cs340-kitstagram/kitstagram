@@ -35,10 +35,17 @@ $stmt = $db->prepare("SELECT c.username FROM Friends f JOIN Cats c ON f.friend_i
 $stmt->bindValue("id", $cat['id']);
 $stmt->execute();
 $friends = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 // Get Selfies
-$stmt = $db->prepare("SELECT s.id, s.likes, s.caption, s.filename, UNIX_TIMESTAMP(s.date_uploaded) as date_uploaded, u.username
-  FROM Cats c LEFT JOIN Friends f ON f.cat_id = c.id LEFT JOIN Cats u ON u.id = f.friend_id LEFT JOIN Selfies s ON 
-  s.cat_id = f.friend_id WHERE c.username = :username ORDER BY s.date_uploaded;");
+$stmt = $db->prepare("
+  SELECT s.id, s.likes, s.caption, s.filename, u.username,
+    UNIX_TIMESTAMP(s.date_uploaded) as date_uploaded
+  FROM Cats c
+  LEFT JOIN Friends f ON f.cat_id = c.id
+  LEFT JOIN Cats u ON u.id = f.friend_id
+  LEFT JOIN Selfies s ON s.cat_id = f.friend_id
+  WHERE c.username = :username
+  ORDER BY s.date_uploaded DESC");
 $stmt->bindValue("username", $username);
 $stmt->execute();
 $selfies = $stmt->fetchAll(PDO::FETCH_ASSOC);
