@@ -35,10 +35,19 @@ if (isset($_GET["username"])) {
 }
 
 // get friends
-$stmt = $db->prepare("SELECT c.username FROM Friends f JOIN Cats c ON f.friend_id = c.id WHERE f.cat_id = :id");
+$stmt = $db->prepare("SELECT c.id, c.username FROM Friends f JOIN Cats c ON f.friend_id = c.id WHERE f.cat_id = :id");
 $stmt->bindValue("id", $cat['id']);
 $stmt->execute();
 $friends = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Are we friends with this cat?
+$we_are_friends = 0;
+foreach ($friends as $f) {
+  if ($f['id'] === $user_id) {
+    $we_are_friends = 1;
+    break;
+  }
+}
 
 // Get Selfies
 $stmt = $db->prepare("SELECT s.id, s.likes, s.caption, s.filename, UNIX_TIMESTAMP(s.date_uploaded) as date_uploaded
@@ -96,11 +105,22 @@ $selfies = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <section class="profile-section">
         <h2>Friends</h2>
 
+        <?php if ($cat['id'] !== $user_id) { ?>
+          <form action="friend.php" method="POST">
+            <input type="hidden" name="username" value="<?= e($cat['username']) ?>">
+            <input type="hidden" name="friend" value="<?= e(!$we_are_friends) ?>">
+            <?php if ($we_are_friends) { ?>
+              <button>Unfriend this cat</button>
+            <?php } else { ?>
+              <button>Friend this cat</button>
+            <?php } ?>
+          </form>
+        <?php } ?>
+
         <?php foreach ($friends as $friend) { ?>
           <p><?= profile_link($friend['username']) ?></p>
         <?php } ?>
       </section>
-
 
     </main>
   </body>

@@ -86,6 +86,8 @@ INSERT INTO Friends VALUES (7, 12);
 INSERT INTO Friends VALUES (12, 23);
 INSERT INTO Friends VALUES (5, 23);
 INSERT INTO Friends VALUES (23, 33);
+-- Make friendship reciprocal
+INSERT INTO Friends (cat_id, friend_id) SELECT friend_id, cat_id FROM Friends;
 
 -- Selfies Table Initial Values --
 INSERT INTO Selfies VALUES (101, 'zelda.jpg', 'me', current_timestamp(), 1, 0);
