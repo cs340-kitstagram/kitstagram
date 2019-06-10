@@ -69,6 +69,12 @@ function get_selfie_url($id) {
   return "selfie.php?id=".urlencode($id);
 }
 
+// Returns an HTML snippet which links to the profile of cat with the given username.
+function profile_link($username) {
+  return '<a href="'. e(get_profile_url(e($username))) .'">'. e($username) .'</a>';
+}
+
+
 // Returns the full URL of the current page (without query parameters)
 function current_url() {
   $url = 'http';

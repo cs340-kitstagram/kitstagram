@@ -57,11 +57,6 @@ $stmt->execute();
 $row = $stmt->fetch();
 $liked = $row['liked'];
 
-
-function profile_link($username) {
-  return '<a href="'. e(get_profile_url(e($username))) .'">'. e($username) .'</a>';
-}
-
 ?>
 <!doctype html>
 <html>
